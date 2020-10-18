@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module Types
+  # List of All GraphQL/Mutations
   class MutationType < Types::BaseObject
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World"
-    end
+    # Company
+    field :create_company, mutation: Mutations::CreateCompany
+    field :sign_in_company, mutation: Mutations::SignInCompany
+    # Doctor
+    field :create_doctor, mutation: Mutations::CreateDoctor
+    field :sign_in_doctor, mutation: Mutations::SignInDoctor
   end
 end
