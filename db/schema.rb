@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_170343) do
+ActiveRecord::Schema.define(version: 2020_10_21_120455) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,23 @@ ActiveRecord::Schema.define(version: 2020_10_18_170343) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "journeys", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "doctor_id"
+    t.string "name"
+    t.datetime "date"
+    t.datetime "payment_date"
+    t.string "payment_method"
+    t.float "wage"
+    t.boolean "provides_ppe"
+    t.string "hire_entity"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_journeys_on_company_id"
+    t.index ["doctor_id"], name: "index_journeys_on_doctor_id"
   end
 
   create_table "managers", force: :cascade do |t|

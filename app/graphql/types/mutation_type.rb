@@ -12,5 +12,8 @@ module Types
     # Manager
     field :create_manager, mutation: Mutations::CreateManager
     field :sign_in_manager, mutation: Mutations::SignInManager
+
+    # Journey
+    field :create_journey, mutation: Mutations::CreateJourney
   end
 end

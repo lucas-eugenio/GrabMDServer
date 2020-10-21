@@ -13,13 +13,7 @@ module Mutations
     def create_token(token_prefix, user_id)
       crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
       # Token for MVP, Use a Service Like JWT on Real Server
-      token = crypt.encrypt_and_sign("#{token_prefix}:#{user_id}")
-      save_token(token)
-    end
-
-    def save_token(token)
-      context[:session].present? ? context[:session][:token] = token : context[:session] = { token: token }
-      token
+      crypt.encrypt_and_sign("#{token_prefix}:#{user_id}")
     end
 
     def can_user?(token, permission)
@@ -37,13 +31,24 @@ module Mutations
     end
 
     def find_user(token)
+      token_to_id = ->(prefix) { token.gsub("#{prefix}:", '').to_i }
+
       case token
       when /company/
-        Company.find token.gsub('company:', '').to_i
+        Company.find token_to_id.call('company')
       when /doctor/
-        Doctor.find token.gsub('doctor:', '').to_i
+        Doctor.find token_to_id.call('doctor')
       when /manager/
-        Manager.find token.gsub('manager:', '').to_i
+        Manager.find token_to_id.call('manager')
+      end
+    end
+
+    def user_company(user)
+      case user.class
+      when Company
+        user
+      when Manager
+        user.company
       end
     end
   end
