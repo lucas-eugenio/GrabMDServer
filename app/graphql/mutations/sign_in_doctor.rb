@@ -3,24 +3,22 @@
 module Mutations
   # GraphQL/Mutations/SignInDoctor
   class SignInDoctor < BaseMutation
-    null true
-
-    argument :credentials, Types::DoctorAuthProviderCredentialsInput, required: false
+    argument :crm, String, required: true
+    argument :password, String, required: true
 
     field :token, String, null: true
     field :doctor, Types::DoctorType, null: true
+    field :errors, String, null: true
 
-    def resolve(credentials: nil)
-      return unless credentials
+    def resolve(crm: nil, password: nil)
+      return { errors: 'Credencias Não Informadas' } unless crm && password
 
-      doctor = Doctor.find_by crm: credentials[:crm]
+      doctor = Doctor.find_by crm: crm
 
-      return unless doctor
-      return unless doctor.authenticate(credentials[:password])
+      return { errors: 'Médico Não Cadastrado' } unless doctor
+      return { errors: 'Senha Incorreta' } unless doctor.authenticate(password)
 
-      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-      # Token for MVP, Use a Service Like JWT on Real Server
-      token = crypt.encrypt_and_sign("doctor-id:#{doctor.id}")
+      token = create_token('doctor', doctor.id)
 
       { doctor: doctor, token: token }
     end

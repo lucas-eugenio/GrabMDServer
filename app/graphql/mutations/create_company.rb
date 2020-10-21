@@ -3,24 +3,23 @@
 module Mutations
   # GraphQL/Mutations/CreateCompany
   class CreateCompany < BaseMutation
-    # Type::CompanyAuthProviderSignupData
-    class CompanyAuthProviderSignupData < Types::BaseInputObject
-      argument :credentials, Types::CompanyAuthProviderCredentialsInput, required: false
-    end
-
     argument :name, String, required: true
     argument :email, String, required: true
-    argument :auth_provider, CompanyAuthProviderSignupData, required: false
+    argument :cnpj, String, required: true
+    argument :password, String, required: true
 
-    type Types::CompanyType
+    field :company, Types::CompanyType, null: true
+    field :errors, String, null: true
 
-    def resolve(name: nil, email: nil, auth_provider: nil)
-      Company.create!(
+    def resolve(name: nil, email: nil, cnpj: nil, password: nil)
+      company = Company.create!(
         name: name,
         email: email,
-        cnpj: auth_provider&.[](:credentials)&.[](:cnpj),
-        password: auth_provider&.[](:credentials)&.[](:password)
+        cnpj: cnpj,
+        password: password
       )
+
+      { company: company }
     end
   end
 end

@@ -3,24 +3,23 @@
 module Mutations
   # GraphQL/Mutations/CreateDoctor
   class CreateDoctor < BaseMutation
-    # Type::DoctorAuthProviderSignupData
-    class DoctorAuthProviderSignupData < Types::BaseInputObject
-      argument :credentials, Types::DoctorAuthProviderCredentialsInput, required: false
-    end
-
     argument :name, String, required: true
     argument :email, String, required: true
-    argument :auth_provider, DoctorAuthProviderSignupData, required: false
+    argument :crm, String, required: true
+    argument :password, String, required: true
 
-    type Types::DoctorType
+    field :doctor, Types::DoctorType, null: true
+    field :errors, String, null: true
 
-    def resolve(name: nil, email: nil, auth_provider: nil)
-      Doctor.create!(
+    def resolve(name: nil, email: nil, crm: nil, password: nil)
+      doctor = Doctor.create!(
         name: name,
         email: email,
-        crm: auth_provider&.[](:credentials)&.[](:crm),
-        password: auth_provider&.[](:credentials)&.[](:password)
+        crm: crm,
+        password: password
       )
+
+      { doctor: doctor }
     end
   end
 end

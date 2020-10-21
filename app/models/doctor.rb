@@ -2,17 +2,18 @@
 
 # Models/Doctor
 class Doctor < ApplicationRecord
-  has_secure_password
+  include Authentifiable
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
   validates :crm, presence: true, uniqueness: true
-
   validate :crm_format
+
+  def permissions
+    {}
+  end
 
   private
 
   def crm_format
-    errors.add(:crm, 'Wrong Format') unless crm.match(/\A[1-9]{5}[1-9]?$\z/)
+    errors.add(:crm, 'Wrong Format') unless crm.match(/\A\d{5}\d?\z/)
   end
 end
