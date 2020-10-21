@@ -10,7 +10,7 @@ class Manager < ApplicationRecord
   validate :cpf_format
 
   def permissions
-    {}
+    { create_journey: true }
   end
 
   def can?(permission)

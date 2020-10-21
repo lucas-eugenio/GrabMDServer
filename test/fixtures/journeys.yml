@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: MyString
+  payment_date: MyString
+  payment_mathod: MyString
+  wage: MyString
+  provides_ppe: MyString
+  hire_entity: MyString
+  address: MyString
+
+two:
+  name: MyString
+  date: MyString
+  payment_date: MyString
+  payment_mathod: MyString
+  wage: MyString
+  provides_ppe: MyString
+  hire_entity: MyString
+  address: MyString
