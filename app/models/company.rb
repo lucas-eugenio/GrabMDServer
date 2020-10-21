@@ -17,6 +17,10 @@ class Company < ApplicationRecord
     { create_manager: true }
   end
 
+  def can?(permission)
+    permissions[permission]
+  end
+
   private
 
   def cnpj_format

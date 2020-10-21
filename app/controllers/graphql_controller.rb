@@ -23,29 +23,7 @@ class GraphqlController < ApplicationController
   private
 
   def context
-    { session: session, current_user: current_user }
-  end
-
-  def current_user
-    return unless session[:token]
-
-    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-    token = crypt.decrypt_and_verify session[:token]
-
-    find_user(token)
-  rescue ActiveSupport::MessageVerifier::InvalidSignature
-    nil
-  end
-
-  def find_user(token)
-    case token
-    when /company/
-      Company.find token.gsub('company:', '').to_i
-    when /doctor/
-      Doctor.find token.gsub('doctor:', '').to_i
-    when /manager/
-      Manager.find token.gsub('manager:', '').to_i
-    end
+    { session: session }
   end
 
   # Handle form data, JSON body, or a blank value
