@@ -2,13 +2,20 @@
 
 # Models/Company
 class Company < ApplicationRecord
-  has_secure_password
+  include Authentifiable
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  has_many :managers, dependent: :destroy
+
   validates :cnpj, presence: true, uniqueness: true
-
   validate :cnpj_format
+
+  def can_create_manager?
+    true
+  end
+
+  def permissions
+    { create_manager: true }
+  end
 
   private
 
