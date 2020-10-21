@@ -13,6 +13,10 @@ class Manager < ApplicationRecord
     {}
   end
 
+  def can?(permission)
+    permissions[permission]
+  end
+
   private
 
   def cpf_format

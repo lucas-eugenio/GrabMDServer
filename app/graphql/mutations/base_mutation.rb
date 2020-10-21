@@ -22,12 +22,29 @@ module Mutations
       token
     end
 
-    def user
-      context[:current_user]
+    def can_user?(token, permission)
+      current_user(token).permissions[permission]
     end
 
-    def can_user?(permission)
-      user.permissions[permission]
+    def current_user(token)
+      return unless token
+
+      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+      token = crypt.decrypt_and_verify token
+      find_user(token)
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      nil
+    end
+
+    def find_user(token)
+      case token
+      when /company/
+        Company.find token.gsub('company:', '').to_i
+      when /doctor/
+        Doctor.find token.gsub('doctor:', '').to_i
+      when /manager/
+        Manager.find token.gsub('manager:', '').to_i
+      end
     end
   end
 end

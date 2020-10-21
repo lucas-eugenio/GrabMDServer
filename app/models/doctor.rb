@@ -11,6 +11,10 @@ class Doctor < ApplicationRecord
     {}
   end
 
+  def can?(permission)
+    permissions[permission]
+  end
+
   private
 
   def crm_format
