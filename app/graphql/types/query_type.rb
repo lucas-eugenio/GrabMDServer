@@ -1,13 +1,8 @@
-module Types
-  class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+# frozen_string_literal: true
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
+module Types
+  # List of All GraphQL/Querys
+  class QueryType < Types::BaseObject
+    field :find_journeys, resolver: Resolvers::FindJourneysResolver
   end
 end
