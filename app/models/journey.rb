@@ -30,4 +30,8 @@ class Journey < ApplicationRecord
   scope :with_payment_method, ->(method) { where(payment_method: method) if method.present? }
   scope :that_hires, ->(entity) { where(hire_entity: entity) if entity.present? }
   scope :that_provides_ppe, ->(provides) { where(provides_ppe: provides) if provides.present? }
+
+  def doctor?
+    doctor_id.present?
+  end
 end

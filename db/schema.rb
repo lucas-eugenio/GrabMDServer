@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_120455) do
+ActiveRecord::Schema.define(version: 2020_10_22_172037) do
+
+  create_table "candidatures", force: :cascade do |t|
+    t.integer "journey_id"
+    t.integer "doctor_id"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_candidatures_on_doctor_id"
+    t.index ["journey_id"], name: "index_candidatures_on_journey_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"

@@ -15,5 +15,8 @@ module Types
 
     # Journey
     field :create_journey, mutation: Mutations::CreateJourney
+
+    # Candidature
+    field :create_candidature, mutation: Mutations::CreateCandidature
   end
 end
