@@ -10,7 +10,7 @@ class Doctor < ApplicationRecord
   validate :crm_format
 
   def permissions
-    {}
+    { create_candidature: true }
   end
 
   def can?(permission)
