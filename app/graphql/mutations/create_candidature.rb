@@ -17,6 +17,7 @@ module Mutations
       journey = Journey.find_by_id(journey_id)
       return { errors: 'Vaga Incorreta' } unless journey
       return { errors: 'Vaga já Preenchida' } if journey.doctor?
+      return { errors: 'Você já se Inscreveu' } if already_created?(doctor, journey)
 
       candidature = create_candidature(doctor, journey)
       { candidature: candidature }
@@ -30,6 +31,10 @@ module Mutations
         journey: journey,
         status: 'in_progress'
       )
+    end
+
+    def already_created?(doctor, journey)
+      Candidature.where(doctor: doctor, journey: journey).count.positive?
     end
   end
 end

@@ -12,6 +12,7 @@ class Candidature < ApplicationRecord
   }
 
   validates :status, presence: true
+  validates :doctor, uniqueness: { scope: :journey }
 
   scope :of_doctor, ->(id) { where(doctor_id: id) }
   scope :of_journey, ->(id) { where(journey_id: id) }

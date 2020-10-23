@@ -16,5 +16,6 @@ module Types
     field :payment_method, Types::PaymentMethodType, null: true
     field :provides_ppe, Boolean, null: true
     field :hire_entity, Types::HireEntityType, null: true
+    field :doctor, Types::DoctorType, null: true
   end
 end
