@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Types
-  # GraphQL/Types/FindJourneysType
-  class FindJourneysType < Types::BaseObject
-    field :journeys, [Types::JourneyType], null: true
+  # GraphQL/Types/MyCandidaturesType
+  class MyCandidaturesType < Types::BaseObject
+    field :candidatures, [Types::CandidatureType], null: true
     field :pagination, Types::PaginationType, null: true
     field :errors, String, null: true
   end

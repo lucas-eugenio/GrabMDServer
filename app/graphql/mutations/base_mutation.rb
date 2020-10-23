@@ -42,14 +42,5 @@ module Mutations
         Manager.find token_to_id.call('manager')
       end
     end
-
-    def user_company(user)
-      case user.class
-      when Company
-        user
-      when Manager
-        user.company
-      end
-    end
   end
 end

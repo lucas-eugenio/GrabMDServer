@@ -3,6 +3,7 @@
 module Resolvers
   # GraphQL/Resolvers/FindJourneysResolver
   class FindJourneysResolver < Resolvers::BaseResolver
+    argument :token, String, required: true
     argument :start_date, String, required: false
     argument :end_date, String, required: false
     argument :start_payment_date, String, required: false
@@ -18,9 +19,13 @@ module Resolvers
     type Types::FindJourneysType, null: false
 
     def resolve(
-      start_date: nil, end_date: nil, start_payment_date: nil, end_payment_date: nil, wage: nil,
+      token: nil, start_date: nil, end_date: nil, start_payment_date: nil, end_payment_date: nil, wage: nil,
       address: nil, payment_method: nil, provides_ppe: nil, hire_entity: nil, page: 1, per_page: 5
     )
+      user = current_user(token)
+      return { errors: 'Token Incorreto' } unless user
+      return { errors: 'Não Autorizado' } unless user.can? :find_journeys
+
       journeys = apply_scopes(
         start_date, end_date, start_payment_date, end_payment_date,
         wage, address, payment_method, provides_ppe, hire_entity
@@ -46,10 +51,7 @@ module Resolvers
              .with_payment_method(payment_method)
              .that_provides_ppe(provides_ppe)
              .that_hires(hire_entity)
-    end
-
-    def number_of_pages(total, per_page)
-      total / per_page
+             .without_doctor
     end
   end
 end
