@@ -11,7 +11,7 @@ class Company < ApplicationRecord
   validate :cnpj_format
 
   def permissions
-    { create_manager: true, create_journey: true }
+    { create_manager: true, create_journey: true, my_managers: true }
   end
 
   def can?(permission)
