@@ -7,5 +7,7 @@ module Types
     field :find_journeys, resolver: Resolvers::FindJourneysResolver
     # Candidature
     field :my_candidatures, resolver: Resolvers::MyCandidaturesResolver
+    # Managers
+    field :my_managers, resolver: Resolvers::MyManagersResolver
   end
 end
