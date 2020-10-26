@@ -5,6 +5,7 @@ class Doctor < ApplicationRecord
   include Authentifiable
 
   has_many :jorneys, dependent: :destroy
+  has_many :candidatures, dependent: :destroy
 
   validates :crm, presence: true, uniqueness: true
   validate :crm_format

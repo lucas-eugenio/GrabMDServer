@@ -5,6 +5,8 @@ class Journey < ApplicationRecord
   belongs_to :company
   belongs_to :doctor, optional: true
 
+  has_many :candidatures, dependent: :destroy
+
   enum payment_method: {
     account_debit: 'account_debit'
   }
