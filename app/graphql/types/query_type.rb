@@ -5,6 +5,7 @@ module Types
   class QueryType < Types::BaseObject
     # Journey
     field :find_journeys, resolver: Resolvers::FindJourneysResolver
+    field :my_journeys, resolver: Resolvers::MyJourneysResolver
     # Candidature
     field :my_candidatures, resolver: Resolvers::MyCandidaturesResolver
     # Managers
