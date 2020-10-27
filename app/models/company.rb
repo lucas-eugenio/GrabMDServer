@@ -5,13 +5,13 @@ class Company < ApplicationRecord
   include Authentifiable
 
   has_many :managers, dependent: :destroy
-  has_many :jorneys, dependent: :destroy
+  has_many :journeys, dependent: :destroy
 
   validates :cnpj, presence: true, uniqueness: true
   validate :cnpj_format
 
   def permissions
-    { create_manager: true, create_journey: true, my_managers: true }
+    { create_manager: true, create_journey: true, my_managers: true, my_journeys: true }
   end
 
   def can?(permission)
