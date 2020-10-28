@@ -24,7 +24,7 @@ module Resolvers
     private
 
     def apply_scopes(doctor_id)
-      Candidature.of_doctor(doctor_id)
+      Candidature.of_doctor(doctor_id).order('id DESC')
     end
   end
 end

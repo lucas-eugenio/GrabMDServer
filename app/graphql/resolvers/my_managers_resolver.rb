@@ -24,7 +24,7 @@ module Resolvers
     private
 
     def apply_scopes(company)
-      company.managers.order('created_at DESC')
+      company.managers.order('id DESC')
     end
   end
 end
