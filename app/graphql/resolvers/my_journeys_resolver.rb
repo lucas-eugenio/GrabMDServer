@@ -24,7 +24,7 @@ module Resolvers
     private
 
     def apply_scopes(user)
-      user.company.journeys.order('created_at DESC')
+      user.company.journeys.order('id DESC')
     end
   end
 end

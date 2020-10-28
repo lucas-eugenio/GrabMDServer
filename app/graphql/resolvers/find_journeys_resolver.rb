@@ -52,6 +52,7 @@ module Resolvers
              .that_provides_ppe(provides_ppe)
              .that_hires(hire_entity)
              .without_doctor
+             .order('id DESC')
     end
   end
 end
