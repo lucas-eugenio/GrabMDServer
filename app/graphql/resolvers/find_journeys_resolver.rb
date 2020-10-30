@@ -28,7 +28,7 @@ module Resolvers
 
       journeys = apply_scopes(
         start_date, end_date, start_payment_date, end_payment_date,
-        wage, address, payment_method, provides_ppe, hire_entity
+        wage, address, payment_method, provides_ppe, hire_entity, user.id
       )
       pagination = get_pagination(page, journeys.count, per_page)
       journeys = filter_page(journeys, page, per_page)
@@ -40,18 +40,12 @@ module Resolvers
 
     def apply_scopes(
       start_date, end_date, start_payment_date, end_payment_date,
-      wage, address, payment_method, provides_ppe, hire_entity
+      wage, address, payment_method, provides_ppe, hire_entity, doctor_id
     )
-      Journey.with_date_after(start_date)
-             .with_date_before(end_date)
-             .with_payment_date_after(start_payment_date)
-             .with_payment_date_before(end_payment_date)
-             .with_wage_bigger_than(wage)
-             .with_address(address)
-             .with_payment_method(payment_method)
-             .that_provides_ppe(provides_ppe)
-             .that_hires(hire_entity)
-             .without_doctor
+      Journey.with_date_after(start_date).with_date_before(end_date)
+             .with_payment_date_after(start_payment_date).with_payment_date_before(end_payment_date)
+             .with_wage_bigger_than(wage).with_address(address).with_payment_method(payment_method)
+             .that_provides_ppe(provides_ppe).that_hires(hire_entity).without_doctor.without_candidature(doctor_id)
              .order('id DESC')
     end
   end

@@ -17,5 +17,8 @@ module Types
     field :provides_ppe, Boolean, null: true
     field :hire_entity, Types::HireEntityType, null: true
     field :doctor, Types::DoctorType, null: true
+
+    # Extra
+    field :candidatures, [Types::CandidatureType], null: true
   end
 end

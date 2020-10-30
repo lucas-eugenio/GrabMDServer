@@ -33,6 +33,11 @@ class Journey < ApplicationRecord
   scope :that_hires, ->(entity) { where(hire_entity: entity) if entity.present? }
   scope :that_provides_ppe, ->(provides) { where(provides_ppe: provides) if provides.present? }
   scope :without_doctor, -> { where(doctor_id: nil) }
+  scope :without_candidature, lambda { |doctor_id|
+    where("'journeys'.'id' NOT IN (
+      SELECT 'candidatures'.'journey_id' FROM 'candidatures' WHERE 'candidatures'.'doctor_id' = #{doctor_id}
+    )")
+  }
 
   def doctor?
     doctor_id.present?
