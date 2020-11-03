@@ -17,11 +17,22 @@ module Mutations
       return { errors: 'Token Incorreto' } unless user
       return { errors: 'Não Autorizado' } unless user.can? :create_manager
 
+      return { errors: 'CPF Já Cadastrado' } if repeated_cpf(cpf)
+      return { errors: 'Email Já Cadastrado' } if repeated_email(email)
+
       manager = create_manager(user, name, email, cpf, password)
       { manager: manager }
     end
 
     private
+
+    def repeated_cpf(cpf)
+      Manager.where(cpf: cpf).count.positive?
+    end
+
+    def repeated_email(email)
+      Manager.where(email: email).count.positive?
+    end
 
     def create_manager(company, name, email, cpf, password)
       Manager.create!(
