@@ -6,10 +6,12 @@ module Mutations
   RSpec.describe SignInManager do
     let(:mutation) { Mutations::SignInManager.new(object: nil, field: nil, context: {}) }
 
+    before do
+      create(:manager)
+    end
+
     describe 'Cenário 1' do
       it 'Autentica Gestor com Sucesso' do
-        create(:manager)
-
         result = mutation.resolve(
           cpf: '156.535.950-04',
           password: '123456'
@@ -22,8 +24,6 @@ module Mutations
 
     describe 'Cenário 2' do
       it 'Erro de Senha Incorreta' do
-        create(:manager)
-
         result = mutation.resolve(
           cpf: '156.535.950-04',
           password: '123457'
@@ -36,8 +36,6 @@ module Mutations
 
     describe 'Cenário 3' do
       it 'Erro de Gestor Não Cadastrado' do
-        create(:manager)
-
         result = mutation.resolve(
           cpf: '156.535.950-05',
           password: '123456'
