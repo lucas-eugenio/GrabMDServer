@@ -5,14 +5,12 @@ require 'rails_helper'
 module Mutations
   RSpec.describe CreateJourney do
     let(:mutation) { Mutations::CreateJourney.new(object: nil, field: nil, context: {}) }
+    let(:company) { create(:company) }
+    let(:token) { create_token('company', company.id) }
 
     describe 'Cenário 1' do
       it 'Cria Plantão com Sucesso' do
-        company = create(:company)
-
         expect(Journey.count).to eq(0)
-
-        token = create_token('company', company.id)
 
         result = mutation.resolve(
           token: token,

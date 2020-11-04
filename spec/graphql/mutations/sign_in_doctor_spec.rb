@@ -6,10 +6,12 @@ module Mutations
   RSpec.describe SignInDoctor do
     let(:mutation) { Mutations::SignInDoctor.new(object: nil, field: nil, context: {}) }
 
+    before do
+      create(:doctor)
+    end
+
     describe 'Cenário 1' do
       it 'Autentica Médico com Sucesso' do
-        create(:doctor)
-
         result = mutation.resolve(
           crm: '115573',
           password: '123456'
@@ -22,8 +24,6 @@ module Mutations
 
     describe 'Cenário 2' do
       it 'Erro de Senha Incorreta' do
-        create(:doctor)
-
         result = mutation.resolve(
           crm: '115573',
           password: '123457'
@@ -36,8 +36,6 @@ module Mutations
 
     describe 'Cenário 3' do
       it 'Erro de Médico Não Cadastrado' do
-        create(:doctor)
-
         result = mutation.resolve(
           crm: '123456',
           password: '123456'

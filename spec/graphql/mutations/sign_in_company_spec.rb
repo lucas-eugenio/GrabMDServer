@@ -6,10 +6,12 @@ module Mutations
   RSpec.describe SignInCompany do
     let(:mutation) { Mutations::SignInCompany.new(object: nil, field: nil, context: {}) }
 
+    before do
+      create(:company)
+    end
+
     describe 'Cenário 1' do
       it 'Autentica Empresa com Sucesso' do
-        create(:company)
-
         result = mutation.resolve(
           cnpj: '63.733.327/0001-92',
           password: '123456'
@@ -22,8 +24,6 @@ module Mutations
 
     describe 'Cenário 2' do
       it 'Erro de Senha Incorreta' do
-        create(:company)
-
         result = mutation.resolve(
           cnpj: '63.733.327/0001-92',
           password: '123457'
@@ -36,8 +36,6 @@ module Mutations
 
     describe 'Cenário 3' do
       it 'Erro de Empresa Não Cadastrado' do
-        create(:company)
-
         result = mutation.resolve(
           cnpj: '123456',
           password: '123456'
