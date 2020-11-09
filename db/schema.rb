@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_172037) do
+ActiveRecord::Schema.define(version: 2020_11_09_221746) do
 
   create_table "candidatures", force: :cascade do |t|
     t.integer "journey_id"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2020_10_22_172037) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.string "address"
+    t.string "phone"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -38,6 +41,9 @@ ActiveRecord::Schema.define(version: 2020_10_22_172037) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "phone"
+    t.string "formation"
+    t.string "experiences"
   end
 
   create_table "journeys", force: :cascade do |t|
