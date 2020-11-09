@@ -18,5 +18,6 @@ module Types
 
     # Candidature
     field :create_candidature, mutation: Mutations::CreateCandidature
+    field :accept_candidature, mutation: Mutations::AcceptCandidature
   end
 end

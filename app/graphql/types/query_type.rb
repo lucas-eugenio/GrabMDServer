@@ -8,6 +8,7 @@ module Types
     field :my_journeys, resolver: Resolvers::MyJourneysResolver
     # Candidature
     field :my_candidatures, resolver: Resolvers::MyCandidaturesResolver
+    field :journey_candidatures, resolver: Resolvers::JourneyCandidaturesResolver
     # Managers
     field :my_managers, resolver: Resolvers::MyManagersResolver
   end
