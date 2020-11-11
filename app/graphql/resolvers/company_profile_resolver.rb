@@ -4,9 +4,9 @@ module Resolvers
   # GraphQL/Resolvers/DoctorProfileResolver
   class CompanyProfileResolver < Resolvers::BaseResolver
     argument :token, String, required: true
-    argument :company_id, String, required: true
+    argument :company_id, ID, required: true
 
-    type Types::DoctorProfileType, null: false
+    type Types::CompanyProfileType, null: false
 
     def resolve(token: nil, company_id: nil)
       user = current_user(token)

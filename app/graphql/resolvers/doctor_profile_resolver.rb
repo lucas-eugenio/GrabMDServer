@@ -4,7 +4,7 @@ module Resolvers
   # GraphQL/Resolvers/DoctorProfileResolver
   class DoctorProfileResolver < Resolvers::BaseResolver
     argument :token, String, required: true
-    argument :doctor_id, String, required: true
+    argument :doctor_id, ID, required: true
 
     type Types::DoctorProfileType, null: false
 
