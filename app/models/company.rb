@@ -12,7 +12,7 @@ class Company < ApplicationRecord
 
   def permissions
     { create_manager: true, create_journey: true, my_managers: true, my_journeys: true, journey_candidatures: true,
-      accept_candidature: true, company_profile: true }
+      accept_candidature: true, update_company_profile: true, doctor_profile: true, my_profile: true }
   end
 
   def can?(permission)

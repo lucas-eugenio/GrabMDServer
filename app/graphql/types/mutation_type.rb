@@ -19,5 +19,9 @@ module Types
     # Candidature
     field :create_candidature, mutation: Mutations::CreateCandidature
     field :accept_candidature, mutation: Mutations::AcceptCandidature
+
+    # Profile
+    field :update_doctor_profile, mutation: Mutations::UpdateDoctorProfile
+    field :update_company_profile, mutation: Mutations::UpdateCompanyProfile
   end
 end

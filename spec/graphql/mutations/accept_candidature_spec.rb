@@ -24,6 +24,7 @@ module Mutations
         expect(result[:errors]).to eq(nil)
         expect(Candidature.find(candidature.id).status).to eq('accepted')
         expect(Candidature.where.not(id: candidature.id).pluck(:status)).to eq(['refused'])
+        expect(Journey.find(1).doctor).to eq(first_doctor)
       end
     end
   end
