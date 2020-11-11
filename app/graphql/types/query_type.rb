@@ -11,5 +11,9 @@ module Types
     field :journey_candidatures, resolver: Resolvers::JourneyCandidaturesResolver
     # Managers
     field :my_managers, resolver: Resolvers::MyManagersResolver
+    # Profiles
+    field :my_profile, resolver: Resolvers::MyProfileResolver
+    field :company_profile, resolver: Resolvers::CompanyProfileResolver
+    field :doctor_profile, resolver: Resolvers::DoctorProfileResolver
   end
 end

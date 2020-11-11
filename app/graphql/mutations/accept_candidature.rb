@@ -16,6 +16,7 @@ module Mutations
       candidature = Candidature.find_by_id(candidature_id)
       return { errors: 'Candidatura Não Existe' } unless candidature.present?
       return { errors: 'Não Autorizado' } unless candidature.journey.company_id == user.company.id
+      return { errors: 'Plantão Já Possui Médico' } if candidature.journey.doctor.present?
 
       accept_candidature(candidature)
       update_status(candidature)
