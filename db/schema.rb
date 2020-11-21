@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_11_09_221746) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "candidatures", force: :cascade do |t|
-    t.integer "journey_id"
-    t.integer "doctor_id"
+    t.bigint "journey_id"
+    t.bigint "doctor_id"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 2020_11_09_221746) do
   end
 
   create_table "journeys", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "doctor_id"
+    t.bigint "company_id"
+    t.bigint "doctor_id"
     t.string "name"
     t.datetime "date"
     t.datetime "payment_date"
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_221746) do
   end
 
   create_table "managers", force: :cascade do |t|
-    t.integer "company_id"
+    t.bigint "company_id"
     t.string "name"
     t.string "email"
     t.string "cpf"
