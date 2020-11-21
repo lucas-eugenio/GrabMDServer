@@ -25,8 +25,8 @@ module Resolvers
 
         expect(result[:errors]).to eq(nil)
         expect(result[:candidatures].count).to eq(2)
-        expect(result[:candidatures]).to include(Candidature.find(1))
-        expect(result[:candidatures]).to include(Candidature.find(2))
+        expect(result[:candidatures]).to include(Candidature.first)
+        expect(result[:candidatures]).to include(Candidature.second)
       end
     end
 

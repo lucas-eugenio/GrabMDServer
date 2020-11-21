@@ -28,7 +28,7 @@ module Resolvers
         expect(result[:errors]).to eq(nil)
         expect(result[:doctor]).to eq(nil)
         expect(result[:company].present?).to eq(true)
-        expect(result[:company][:id]).to eq(doctor.id)
+        expect(result[:company][:id]).to eq(company.id)
       end
     end
   end

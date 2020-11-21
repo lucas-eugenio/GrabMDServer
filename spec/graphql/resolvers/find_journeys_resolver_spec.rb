@@ -25,8 +25,8 @@ module Resolvers
 
         expect(result[:errors]).to eq(nil)
         expect(result[:journeys].count).to eq(2)
-        expect(result[:journeys]).to include(Journey.find(1))
-        expect(result[:journeys]).to include(Journey.find(2))
+        expect(result[:journeys]).to include(Journey.first)
+        expect(result[:journeys]).to include(Journey.second)
       end
     end
 
@@ -36,10 +36,10 @@ module Resolvers
 
         expect(result[:errors]).to eq(nil)
         expect(result[:journeys].count).to eq(4)
-        expect(result[:journeys]).to include(Journey.find(1))
-        expect(result[:journeys]).to include(Journey.find(2))
-        expect(result[:journeys]).to include(Journey.find(3))
-        expect(result[:journeys]).to include(Journey.find(4))
+        expect(result[:journeys]).to include(Journey.first)
+        expect(result[:journeys]).to include(Journey.second)
+        expect(result[:journeys]).to include(Journey.third)
+        expect(result[:journeys]).to include(Journey.fourth)
       end
     end
 
@@ -59,7 +59,7 @@ module Resolvers
 
         expect(result[:errors]).to eq(nil)
         expect(result[:journeys].count).to eq(1)
-        expect(result[:journeys]).to include(Journey.find(2))
+        expect(result[:journeys]).to include(Journey.second)
       end
     end
 
