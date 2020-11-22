@@ -68,6 +68,6 @@ RSpec.configure do |config|
 end
 
 def create_token(token_prefix, user_id)
-  crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+  crypt = ActiveSupport::MessageEncryptor.new('l5p0FysUWuWD8L9yo6CNPE7hsilXLxFf')
   crypt.encrypt_and_sign("#{token_prefix}:#{user_id}")
 end

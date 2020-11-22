@@ -11,7 +11,7 @@ module Mutations
     private
 
     def create_token(token_prefix, user_id)
-      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+      crypt = ActiveSupport::MessageEncryptor.new('l5p0FysUWuWD8L9yo6CNPE7hsilXLxFf')
       # Token for MVP, Use a Service Like JWT on Real Server
       crypt.encrypt_and_sign("#{token_prefix}:#{user_id}")
     end
@@ -23,7 +23,7 @@ module Mutations
     def current_user(token)
       return unless token
 
-      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+      crypt = ActiveSupport::MessageEncryptor.new('l5p0FysUWuWD8L9yo6CNPE7hsilXLxFf')
       token = crypt.decrypt_and_verify token
       find_user(token)
     rescue ActiveSupport::MessageVerifier::InvalidSignature
